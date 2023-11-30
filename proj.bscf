@@ -1,0 +1,39 @@
+# Official BSCF Glfw Package
+# This code is subject to change
+# wk1093
+
+# glfw target
+# all files in root/src/
+TARGET SLIB glfw ALL
+
+# set root/include/ as an include dir
+INCDIR glfw include
+
+# defines for glfw to compile properly
+IF PLATFORM windows
+DEFINE glfw _GLFW_WIN32
+ENDIF
+IF PLATFORM linux
+DEFINE glfw _GLFW_X11
+ENDIF
+IF PLATFORM macos
+DEFINE glfw _GLFW_COCOA
+ENDIF
+
+# libs for windows
+IF PLATFORM windows
+LIB glfw opengl32
+IF COMPILER gnu # mingw
+LIB glfw gdi32
+ENDIF
+
+# linux libs
+ENDIF
+IF PLATFORM linux
+LIB glfw rt
+LIB glfw m
+LIB glfw dl
+ENDIF
+
+# TODO: macos
+
